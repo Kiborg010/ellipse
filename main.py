@@ -1,14 +1,14 @@
 import sys
 from random import randrange
 
+from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from UI import Ui_MainWindow
 
-class Button(QMainWindow, Ui_MainWindow):
+class Button(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi('Ui.ui', self)
         self.f = 0
         self.button.clicked.connect(self.draw)
 
@@ -17,9 +17,6 @@ class Button(QMainWindow, Ui_MainWindow):
         self.x = randrange(self.size().width())
         self.y = randrange(self.size().height())
         self.h = randrange(100)
-        self.r = randrange(255)
-        self.g = randrange(255)
-        self.b = randrange(255)
 
     def paintEvent(self, event):
         if self.f:
@@ -30,7 +27,7 @@ class Button(QMainWindow, Ui_MainWindow):
             qp.end()
 
     def draw_c(self, qp):
-        qp.setBrush(QColor(self.r, self.g, self.b))
+        qp.setBrush(QColor(255, 255, 0))
         qp.drawEllipse(self.x, self.y, self.h, self.h)
 
 if __name__ == '__main__':
